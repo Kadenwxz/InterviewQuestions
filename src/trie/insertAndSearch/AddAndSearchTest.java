@@ -13,21 +13,21 @@ public class AddAndSearchTest {
 	 */
 	@Test
 	public void nullInputTest() {
-		AddAndSearch aas = new AddAndSearch();
+		TrieOperation aas = new TrieOperation();
 		aas.addWord(null);
 		assertTrue(aas.search(null));
 	}
 	
 	@Test
 	public void emptyInputTest(){
-		AddAndSearch ass = new AddAndSearch();
+		TrieOperation ass = new TrieOperation();
 		ass.addWord("");
 		assertTrue(ass.search(""));
 	}
 	
 	@Test
 	public void mediumSizeInputTest(){
-		AddAndSearch ass = new AddAndSearch();
+		TrieOperation ass = new TrieOperation();
 		ass.addWord(null);
 		ass.addWord("");
 		ass.addWord("kaden");

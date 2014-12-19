@@ -2,7 +2,7 @@ package trie.insertAndSearch;
 
 import trie.Trie;
 
-public class AddAndSearch {
+public class TrieOperation {
 	
 	Trie root = new Trie();
 	boolean hasNull = false;
@@ -16,13 +16,13 @@ public class AddAndSearch {
 	}
 	
 	private void addWord(String s, int index, Trie node){
-		if(index == s.length()){
+		if(s.length() == index){
 			node.isLeaf = true;
 			return;
 		}
 		char c = s.charAt(index);
 		if(node.ch[c] == null)node.ch[c] = new Trie();
-		addWord(s, index + 1, node.ch[c]);		
+		addWord(s, index + 1, node.ch[c]);
 	}
 	
 	public boolean search(String s){
@@ -43,5 +43,3 @@ public class AddAndSearch {
 		return search(s, index + 1, node.ch[c]);
 	}
 }
-
-
