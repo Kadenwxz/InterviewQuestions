@@ -27,7 +27,7 @@ public class MixIterator {
 		return false;
 	}
 	
-	public int next(){
+/*	public int next(){
 		
-	}
+	}*/
 }

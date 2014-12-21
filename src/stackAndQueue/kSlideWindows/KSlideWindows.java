@@ -9,16 +9,11 @@ public class KSlideWindows {
         List<Integer> res = new ArrayList<>();
         LinkedList<Integer> biQueue = new LinkedList<>();
         if(A == null || A.length < k)return res;
-        int a = 0, b = 0;
-        while(b < A.length){
-            while(!biQueue.isEmpty() && biQueue.peekLast() > A[b])biQueue.removeLast();
-            biQueue.add(A[b]);
-            if(b >= k - 1){
-                res.add(biQueue.peekFirst());
-            }
-            if(b >= k && A[a] == biQueue.peekFirst()){
-                biQueue.removeFirst();
-            }
+        for(int i = 0; i < A.length; i ++){
+            while(!biQueue.isEmpty() && A[i] < biQueue.peekLast())biQueue.removeLast();
+            biQueue.add(A[i]);
+            if(i - k >= 0 && A[i - k] == biQueue.peekFirst())biQueue.removeFirst();
+            if(i - k + 1 >= 0)res.add(biQueue.peekFirst());
         }
         return res;
     }
