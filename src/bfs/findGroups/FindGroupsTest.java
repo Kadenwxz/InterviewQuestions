@@ -16,6 +16,9 @@ public class FindGroupsTest {
         FindGroups findGroups = new FindGroups();
         int res = findGroups.findGroups(m);
         assertEquals(3, res);
+        int A = 1, B = 2, n = 3;
+        int len = (int)Math.ceil(0.5);
+        System.out.println(len);
     }
 
 }
