@@ -2,10 +2,38 @@ package basicDataStructure;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 
-class MyHashMap<K, V>{
+public class MyHashMap<K, V>{
     
-    class Pair{
+    class Segment<K, V> extends ReentrantLock{        
+        private final static int factor = 4;
+        List<Pair>[] table = new List[factor];
+        public void put(int hashCode, K key, V val){
+            lock();
+            try{
+                int index = hashCode % factor;
+                if(table[index] == null)table[index] = new ArrayList<>();
+                Pair<K, V> pair = new Pair(key, val);
+                table[index].add(pair);
+            }finally{
+                unlock();
+            }
+        }
+        
+        public V get(int hashCode, K key){
+            int index = hashCode % factor;
+            if(table[index] == null)return null;
+            for(Pair<K, V> pair : table[index]){
+                if(pair.getKey().equals(key))return pair.getValue();
+            }
+            return null;
+        }
+        
+
+    }
+    
+    class Pair<K, V>{
         K key;
         V val;
         public Pair(K key, V val){
@@ -21,23 +49,27 @@ class MyHashMap<K, V>{
         }
     }
     
-    private final static int factor = 128;
-    List<Pair>[] memo = new List[factor];
+    private final static int factor = 32;
+    private Segment<K, V>[] segments = (Segment<K, V>[]) new Segment[factor];
+    
+    public MyHashMap(){
+        for(int i = 0; i < factor; i ++){
+            segments[i] = new Segment<>();
+        }
+    }
+    
+    private Segment<K, V> segmentFor(int hashCode){
+        int index = hashCode % 32;
+        return segments[index];
+    }
     
     public void put(K key, V val){
-        int index = key.hashCode()%factor;
-        if(memo[index] == null)memo[index] = new ArrayList();
-        Pair pair = new Pair(key, val);
-        memo[index].add(pair);
+        int hashCode = key.hashCode();
+        segmentFor(hashCode).put(hashCode, key, val);
     }
     
     public V get(K key){
-        int index = key.hashCode()%factor;
-        if(memo[index] == null)return null;
-        List<Pair> list = memo[index];
-        for(Pair pair: list){
-            if(key.equals(pair.key))return pair.getValue();
-        }
-        return null;
+        int hashCode = key.hashCode();
+        return segmentFor(hashCode).get(hashCode, key);
     }
 }
