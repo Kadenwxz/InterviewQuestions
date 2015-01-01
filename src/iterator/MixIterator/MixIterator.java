@@ -21,7 +21,7 @@ public class MixIterator {
                 Object o = itr.next();
                 if(o.getClass().equals(Integer.class)){
                     cur = (Integer) o;
-                }else if(Iterator.class.isInstance(o)){
+                }else if(o.getClass().equals(Iterator.class)){
                     curItr = (Iterator<Integer>) o;
                 }
             }else{

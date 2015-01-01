@@ -21,7 +21,6 @@ public class LongestIncreasingSubsequence {
     private int getMaximumMin(int[] memo, int start, int end, int target){
         start --;
         end ++;
-        
         while(start + 1 < end){
             int mid = (end - start)/2 + start;
             if(target < memo[mid]){
