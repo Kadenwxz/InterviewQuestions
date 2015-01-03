@@ -16,7 +16,7 @@ public class LargerNumbersToTheEnd {
         private void construct(int head, int[] memo, int start, int end){
             left[head] = memo[start];
             right[head] = memo[end];
-            if(start == end)return;
+            if(start >= end)return;
             int mid = (end - start)/2 + start;
             construct(head * 2 + 1, memo, start, mid);
             construct(head * 2 + 2, memo, mid + 1, end);
