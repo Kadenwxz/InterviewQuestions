@@ -23,4 +23,13 @@ public class ConsecutiveSequenceSumTest {
         int[] expected = {1, 1};
         assertArrayEquals(expected, res);
     }
+    
+    @Test
+    public void positiveFunctionTest(){
+        int[] A = {15, 2, 4, 8, 9, 5, 10, 23};
+        ConsecutiveSequenceSum solution = new ConsecutiveSequenceSum();
+        int[] res = solution.getConsequetiveSequenceFromPositive(A, 23);
+        int[] expected = {1, 4};
+        assertArrayEquals(expected, res);
+    }
 }

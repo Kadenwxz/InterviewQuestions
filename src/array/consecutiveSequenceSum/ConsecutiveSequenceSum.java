@@ -21,4 +21,23 @@ public class ConsecutiveSequenceSum {
         }
         return res;
     }
+    
+    public int[] getConsequetiveSequenceFromPositive(int[] A, int target){
+        int[] res = {-1, -1};
+        if(A == null || A.length == 0)return res;
+        int start = 0, sum = 0;
+        for(int i = 0; i < A.length; i ++){
+            sum += A[i];
+            while(sum > target && start < i){
+                sum -= A[start];
+                start ++;
+            }
+            if(sum == target){
+                res[0] = start;
+                res[1] = i;
+                break;
+            }
+        }
+        return res;
+    }
 }
