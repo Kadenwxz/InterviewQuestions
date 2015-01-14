@@ -7,14 +7,15 @@ import java.util.List;
 public class KSlideWindows {
     public List<Integer> getMin(int[] A, int k){
         List<Integer> res = new ArrayList<>();
+        if(A == null || A.length == 0)return res;
         LinkedList<Integer> biQueue = new LinkedList<>();
-        if(A == null || A.length < k)return res;
         for(int i = 0; i < A.length; i ++){
-            while(!biQueue.isEmpty() && A[i] < biQueue.peekLast())biQueue.removeLast();
+            while(!biQueue.isEmpty() && A[i] < biQueue.getLast())biQueue.removeLast();
             biQueue.add(A[i]);
-            if(i - k >= 0 && A[i - k] == biQueue.peekFirst())biQueue.removeFirst();
-            if(i - k + 1 >= 0)res.add(biQueue.peekFirst());
+            if(i - k >= 0 && biQueue.getFirst() == A[i - k])biQueue.removeFirst();
+            if(i - k + 1 >= 0)res.add(biQueue.getFirst());
         }
+        if(res.isEmpty())res.add(biQueue.getFirst());
         return res;
     }
 }

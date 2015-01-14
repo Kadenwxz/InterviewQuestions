@@ -1,4 +1,4 @@
-package companies.rockeFuel;
+package companies.rockeFuel.getProduct;
 
 public class GetProduct {
     public int[] getProduct(int[] A){
@@ -6,11 +6,8 @@ public class GetProduct {
         int len = A.length;
         int[] B = new int[len];
         for(int i = len - 1; i >= 0; i --){
-            if(i == len - 1){
-                B[i] = A[i];
-            }else{
-                B[i] = B[i + 1] * A[i];
-            }
+            int tmp = i == len - 1 ? 1 : B[i + 1];
+            B[i] = A[i] * tmp;
         }
         System.out.println("B = ");
         for(int i : B)System.out.print(i + " ");
